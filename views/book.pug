@@ -1,0 +1,65 @@
+extends layout
+
+block content
+
+  .container-fluid
+
+    nav.navbar.navbar-expand-lg.navbar-dark.bg-primary.fixed-top
+      a.navbar-brand(href='/')= title
+      button.navbar-toggler(type='button' data-toggle='collapse' data-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation')
+        span.navbar-toggler-icon
+
+      .collapse.navbar-collapse(id='navbarSupportedContent')
+        form.form-inline.my-2.my-lg-0.ml-auto(id='search' action='/results' method='GET')
+          input.form-control.mr-sm-2(type='text' placeholder='book title' id='title' name='title' aria-label='Search')
+          button.btn.btn-outline-light.my-2.my-sm-0(type='submit') Search
+
+    .d-flex.justify-content-between(style='margin-top:75px;')
+      h5.text-info Total: #{totalBooks} books
+
+      .btn-group
+        button.btn.btn-outline-dark(type='button') Sort By
+        button.btn.btn-dark.dropdown-toggle.dropdown-toggle-split(type='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
+          span.sr-only Toggle Dropdown
+        .dropdown-menu
+          a.dropdown-item(href='/results?title='+bookTitle) Newest
+          a.dropdown-item(href='/results?title='+bookTitle+'&sort=-ratings') Rating
+          a.dropdown-item(href='/results?title='+bookTitle+'&sort=title') Title
+
+    .row
+      each book in books
+        .col-xl-6.col-lg-6.col-md-12.col-sm-12.col-xs-12.my-2
+          .card.d-flex.flex-row.h-100
+            img.card-img-top.book-cover(src=book.photo alt=book.title)
+            .card-body.py-0
+              h5.card-title.mt-1 #{book.title}
+              h6.card-subtitle.mb-2.text-muted #[strong Author:] #{book.author.name}
+              p.card-text.mb-1 #{book.summary}
+              p.card-text.mb-0 #[strong Genre:]&nbsp;
+                each genre, index in book.genre
+                  span #{genre.name}
+                  if index < book.genre.length - 1
+                    |, 
+              p.card-text.mb-0 #[strong ISBN:] #{book.isbn}
+              p.card-text #[strong Rating:] #{book.ratings} / 5
+
+    nav.my-3
+      ul.pagination.justify-content-center
+        - let index = 1
+        if hasPreviousPage
+          li.page-item
+            a.page-link.first-link(href=queryLink+'&page=1') First
+
+        while index <= lastPage
+          if index >= currentPage-2 && index <= currentPage+2 
+            if index == currentPage
+              li.page-item.active
+                a.page-link(href=queryLink+'&page='+index) #{index}
+            else
+              li.page-item
+                a.page-link(href=queryLink+'&page='+index) #{index}
+          - index++
+
+        if hasNextPage
+          li.page-item
+            a.page-link(href=queryLink+'&page='+lastPage) Last
