@@ -28,5 +28,4 @@ If you have installed the package manager you can run it by typing this command 
 nodemon start
 ```
 
-<<<<<<< HEAD
 In your browser will appear like this [DEMO](https://arr-library.herokuapp.com/).
