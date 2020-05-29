@@ -4,7 +4,7 @@ A simple library website using Framework Express.js.
 
 ## Description
 
-This website contains a list of books where there are covers, titles, authors, genres and also ratings. 
+This website contains a list of books where there are covers, titles, authors, genres and also ratings.
 This website uses pagination, searching, and sorting to make it easier for clients.
 
 ## Installation
@@ -28,4 +28,5 @@ If you have installed the package manager you can run it by typing this command 
 nodemon start
 ```
 
+<<<<<<< HEAD
 In your browser will appear like this [DEMO](https://arr-library.herokuapp.com/).
