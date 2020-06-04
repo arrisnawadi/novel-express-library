@@ -13,11 +13,7 @@ This website uses several package managers such as Pug as a template engine and 
 If you are cloning this repository and running locally then you must install these package manager on your PC.
 
 ```
-npm install cookie-parser debug express http-errors mongoose morgan pug
-```
-
-```
-npm install nodemon clean-css --save-dev
+npm install
 ```
 
 ## Usage
